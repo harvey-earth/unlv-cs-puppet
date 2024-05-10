@@ -1,0 +1,13 @@
+[Unit]
+Description=WSGI instance serving test-facultymentor
+After=network.target
+
+[Service]
+User=nginx
+Group=nginx
+WorkingDirectory=/var/www/html/facultymentor
+Environment="PATH=/var/www/html/facultymentor/bin"
+ExecStart=/var/www/html/facultymentor/bin/uwsgi --ini cs490.ini
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,57 @@
+---
+managedmac::organization: UNLV Computer Science
+managedmac::ntp::enable: true
+managedmac::ntp::servers:
+  - ms.cs.unlv.edu
+  - ms1.cs.unlv.edu
+# Active Directory stuff
+managedmac::activedirectory::enable: true
+managedmac::activedirectory::evaluate: 'true'
+managedmac::activedirectory::provider: dsconfigad
+managedmac::activedirectory::hostname: ad.cs.unlv.edu
+managedmac::activedirectory::username: ldapbind
+managedmac::activedirectory::password: ####NEED PASSWORD
+## The following should be overwritten in nodes
+managedmac::activedirectory::computer: b346
+managedmac::activedirectory::create_mobile_account_at_login: false
+managedmac::activedirectory::force_home_local: true
+# Security Stuff
+managedmac::mcx::bluetooth: off
+managedmac::mcx::wifi: off
+managedmac::mcx::thunderbolt: off
+managedmac::mcx::loginitems:
+  - /Applications/Firefox.app
+managedmac::mcx::suppress_icloud_setup: true
+managedmac::mcx::hidden_preference_panges:
+  - com.apple.preferences.icloud
+  - com.apple.preferences.users
+  - com.apple.preferences.dock
+  - com.apple.preferences.mission
+  - com.apple.preferences.security
+  - com.apple.preferences.startup
+  - com.apple.preferences.siri
+# Login
+managedmac::loginwindow::show_name_and_password_fields: true
+managedmac::loginwindow::disable_autologin: true
+managedmac::loginwindow::disable_guest_account: true
+managedmac::loginwindow::auto_logout_delay: 3600
+managedmac::loginwindow::enable_fast_user_switching: false
+# Software Update
+managedmac::softwareupdate::automatic_update_check: true
+managedmac::softwareupdate::auto_update_apps: true
+# Authorization
+managedmac::authorization::allow_energysaver: false
+managedmac::authorization::allow_datetime: false
+managedmac::authorization::allow_timemachine: false
+managedmac::authorization::allow_printers: false
+managedmac::authorization::allow_dvd_setregion_initial: false
+managedmac::desktop::locked: false
+# Energy Saver Settings
+managedmac::energysaver::desktop:
+  ACPower:
+    'Automatic Restart On Power Loss': true
+    'Disk Sleep Timer-boolean': false
+    'Display Sleep Timer': 240
+    'Sleep On Power Button': false
+    'Wake On LAN': true
+    'System Sleep Timer': 0

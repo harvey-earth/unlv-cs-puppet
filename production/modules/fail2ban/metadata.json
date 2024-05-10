@@ -1,0 +1,67 @@
+{
+  "name": "puppet-fail2ban",
+  "version": "3.3.0",
+  "author": "Vox Pupuli",
+  "summary": "This module installs, configures and manages the Fail2ban service.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/voxpupuli/puppet-fail2ban.git",
+  "project_page": "https://github.com/voxpupuli/puppet-fail2ban",
+  "issues_url": "https://github.com/voxpupuli/puppet-fail2ban/issues",
+  "dependencies": [
+    {
+      "name": "puppet/extlib",
+      "version_requirement": ">= 3.0.0 < 6.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.25.0 < 7.0.0"
+    }
+  ],
+  "data_provider": null,
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04",
+        "18.04",
+        "20.04"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7",
+        "8"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.5.8 < 7.0.0"
+    }
+  ],
+  "tags": [
+    "fail2ban",
+    "firewall",
+    "firewalling",
+    "iptables"
+  ]
+}

@@ -1,0 +1,6 @@
+[org/gnome/desktop/background]
+
+picture-uri='file:///usr/local/share/unlvb.jpg'
+picture-options='centered'
+primary-color='B10202'
+secondary-color='666666'

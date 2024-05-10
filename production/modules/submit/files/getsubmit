@@ -1,0 +1,86 @@
+#!/usr/bin/perl
+
+# John Kowalski
+use strict;
+use File::Copy;
+use Cwd;
+
+my $GETUSER = getlogin();
+my $FROM = "/home/$GETUSER/submit";
+#my $FROM = "/$GETUSER/submit";
+#print "$FROM\n";
+my $CUT_DATE;   # Cut off date string
+my $ANUM;       # Assignment Number
+my $TOO = cwd();
+my $FROM_DIR;
+my @fromfiles;
+my $tmp_file = "";
+my $tmp_name = "";
+my $tmp_date = 0;
+my @tmp_array;
+my $count;
+
+# Print usage guidelines
+if (!$ARGV[0] || !$ARGV[1])
+{
+	print "\n   Getsubmit Usage\n\n";
+        print "You need to specify a cutoff date string\n";
+	print "and an Assignment Number in the form 00..16\n\n";
+        print "Example: getsubmit yyyymmdd(hh)(mm)(ss) dd\n";
+        print "Hours, Minutes and Seconds are optional\n and 00 will be added to date string if omitted.\n\n";
+        print "Files will be copied to the current working directory.\n";
+}
+else # Get cutoff string and assignment number
+{
+        $CUT_DATE = $ARGV[0];
+        while ($CUT_DATE < 10000000000000)
+        {
+             $CUT_DATE *= 10;
+        }
+        $ANUM = $ARGV[1];
+        if ($ARGV[2]) # get into directory is specified
+        {
+                $TOO = $ARGV[2];
+        }
+
+opendir(FROM_DIR, "$FROM") || die("Cannot open directory");
+@fromfiles = sort ( grep { /\.$ANUM\./ } readdir(FROM_DIR));
+
+foreach (@fromfiles) {
+
+	#   login  ass#  timestamp
+        #   $1     $2    $3
+	m/^(\S+)\.(.*)\.(\d+)$/i;
+
+	if ($1 gt $tmp_name) # new name
+	{
+		if ( ($tmp_name ne "") && ($tmp_date le $CUT_DATE))
+		{
+			print "File to Copy $tmp_file\n";
+			copy("$FROM/$tmp_file","$TOO/$tmp_name" . ".cpp") or die "Copy Failed: $!";
+		}
+		$tmp_file = $_;
+		$tmp_name = $1;
+		$tmp_date = $3;
+	}
+	elsif ($1 eq $tmp_name)
+	{
+		if ($3 gt $tmp_date && $3 le $CUT_DATE)
+		{
+			$tmp_file = $_;
+			$tmp_date = $3;
+		}
+	}
+
+
+} # end foreach while from_files
+if (($tmp_name ne "") && ($tmp_date le $CUT_DATE))
+{
+        print "File to Copy $tmp_file\n";
+     	copy("$FROM/$tmp_file","$TOO/$tmp_name" . ".cpp") or die "Copy faled: $!";
+}
+
+closedir(FROM_DIR);
+
+}#end else ARGV[0] || ARGV[1]
+

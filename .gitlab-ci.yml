@@ -1,0 +1,40 @@
+stages:
+  - build
+  - test
+  - deploy
+
+transfer_files:
+  stage: build
+  tags:
+    - puppet
+  script:
+    - git checkout $CI_COMMIT_REF_NAME
+
+# Syntax Check
+check_syntax:
+  stage: test
+  tags:
+    - puppet
+  script:
+   - puppet-lint production/
+   - puppet parser validate production/manifests/*
+   - puppet parser validate production/modules/
+
+# Deploy to codebase in /etc/puppetlabs/code/environments/{production} 
+code_deploy:
+  stage: deploy
+  only:
+    - master
+    - merge-requests
+  except:
+    - dev
+  tags:
+    - puppet
+  before_script:
+    - sudo rm -rf /etc/puppetlabs/code/environments/*
+  script:
+    - sudo cp -r ./* /etc/puppetlabs/code/environments/
+  after_script:
+    - sudo rm -rf /etc/puppetlabs/code/environments/.git
+    - sudo rm -f /etc/puppetlabs/code/environments/README.md
+    - sudo rm -f /etc/puppetlabs/code/environments/.gitlab-ci.yml

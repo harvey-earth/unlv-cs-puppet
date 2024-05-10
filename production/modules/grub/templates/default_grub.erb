@@ -1,0 +1,9 @@
+# File modified by Puppet DO NOT CHANGE HERE
+GRUB_TIMEOUT=120
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT=true
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos_<%= @hostname -%>/root rd.lvm.lv=centos_<%= @hostname -%>/swap rhgb quiet"
+GRUB_DISABLE_RECOVERY="true"

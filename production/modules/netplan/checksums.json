@@ -1,0 +1,22 @@
+{
+  "CHANGELOG.md": "082140de1eb285ab3e10fc2cdb6cafc9",
+  "Gemfile": "6ef9ec65954114ca8b65a7622ca01e01",
+  "LICENSE": "86d3f3a95c324c9479bd8986968f4327",
+  "README.md": "b4262e46f834e5cbd9a806d390090316",
+  "Rakefile": "dea9b7fb13224f44edcbbe636db85050",
+  "manifests/bonds.pp": "e2aff1baa78cc2eef76ca0e33564fe63",
+  "manifests/bridges.pp": "1c52b6ca082cbdba61a13900f034551d",
+  "manifests/ethernets.pp": "08877e4c9adcac4a281f09a29b70eb96",
+  "manifests/init.pp": "187d5ace4070868d0be7bbca2ab3b425",
+  "manifests/vlans.pp": "40e99dc3f724a104e4d8dd0db3c7a2c1",
+  "manifests/wifis.pp": "04a62b75a9b28f5c25a76f2afd1b4ede",
+  "metadata.json": "41d8484dbf5aac5cb32df0cafc3a6121",
+  "spec/default_facts.yml": "4de3cb611af6981a6d22bc77d7dd6f6f",
+  "spec/spec_helper.rb": "4a36f24b9891142e2e09fdbd4a9263c7",
+  "templates/bonds.epp": "a2656351a30d71411f704b6739fbeaa1",
+  "templates/bridges.epp": "604d39bb9e37435cefefd271e4aefb56",
+  "templates/ethernets.epp": "f3e4e5c053a84cf646f1df89d9d83cc4",
+  "templates/header.epp": "863671ceb69681e15a1dc4cb4ccf8adb",
+  "templates/vlans.epp": "1c04eb68f32a76fd588f503ecc30bc07",
+  "templates/wifis.epp": "854f205fad826e02d049cf094848a7ee"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "revolutionsystem-snoopy",
+  "version": "0.1.2",
+  "author": "Daniel Leite",
+  "summary": "Snoopy is a tiny library that logs all executed commands (+ arguments) on your system.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/revolutionsystem/puppet-snoopy.git",
+  "project_page": "https://github.com/revolutionsystem/puppet-snoopy",
+  "issues_url": "https://github.com/revolutionsystem/puppet-snoopy/issues",
+  "dependencies": [
+  
+  ],
+  "data_provider": null,
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04",
+        "16.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.0.0 < 6.0.0"
+    }
+  ]
+}

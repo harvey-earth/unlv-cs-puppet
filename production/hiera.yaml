@@ -1,0 +1,24 @@
+---
+version: 5
+defaults:
+  # Set defaults manually
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Per-node data (yaml version)"
+    path: "nodes/%{::trusted.certname}.yaml"
+
+  - name: "Secret data (encrypted)"
+    lookup_key: eyaml_lookup_key
+    path: "secrets.eyaml"
+    options:
+      pkcs7_private_key: /etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
+      pkcs7_public_key: /etc/puppetlabs/puppet/keys/public_key.pkcs7.pem
+
+  - name: "Per-OS data"
+    path: "os/%{facs.os.family}.yaml"
+
+  - name: "Common data for CS environment"
+    paths:
+      - "common.yaml"

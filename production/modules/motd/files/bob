@@ -1,0 +1,25 @@
+###############################################
+       Department of Computer Science
+              Student Server 
+###############################################
+WARNING:  Unauthorized access to this system is 
+forbidden and will be prosecuted by law. 
+By accessing this system, you agree that your actions
+may be monitored if unauthorized usage is suspected.
+
+
+        ######  ####### ######
+        #     # #     # #     #
+        #     # #     # #     #
+        ######  #     # ######
+        #     # #     # #     #
+        #     # #     # #     #
+        ######  ####### ######
+
+     Your general files are available at
+             /home/[username]
+
+     Your website files are available at
+          /var/www/html/[username]
+
+###############################################

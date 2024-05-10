@@ -1,0 +1,174 @@
+#!/usr/bin/perl
+
+# John Kowalski
+use strict;
+
+my $sec;
+my $min;
+my $hour;
+my $mday;
+my $mon;
+my $year;
+my $year4;
+my $wday;
+my $yday;
+my $isdst;
+my $INFILE;
+my $SUBMIT_USER;
+my $ASSIGNMENT_NUMBER;
+my $OUT_FILE;
+my %instructors = ( "bang"=>1,
+                    "chmajg"=>1,
+                    "jimi"=>1,
+		    "joj5"=>1);
+
+my %num_array = ("01"=>1,
+		"02"=>1,
+		"03"=>1,
+		"04"=>1,
+		"05"=>1,
+		"06"=>1,
+		"07"=>1,
+		"08"=>1,
+		"09"=>1,
+		"10"=>1,
+		"11"=>1,
+		"12"=>1,
+		"13"=>1,
+		"14"=>1,
+		"15"=>1,
+		"16"=>1,
+		"17"=>1,
+		"18"=>1,
+		"19"=>1,
+		"20"=>1,
+		"21"=>1,
+		"22"=>1,
+		"23"=>1,
+		"24"=>1,
+		"25"=>1,
+		"26"=>1,
+		"27"=>1,
+		"28"=>1,
+		"29"=>1,
+		"30"=>1);
+
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+
+# if three args are present
+if (!($ARGV[0] and $ARGV[1] and $ARGV[2]))
+{
+        print "You must specify your program name, assignment number and course instructor login name.\n";
+	print "Assignment Number must be one of\n 01,02,...,29,30\n";
+	print "Current instructors are:\n";
+	foreach my $key (sort keys %instructors) {
+		print "$key\n";
+	}
+        print "You must run the submit program in the directory with your program file.\n";
+        print "Example: submit programname.cpp 04 lee\n";
+}
+# does file exist?
+elsif (! -f $ARGV[0])
+{
+	print "File Not Found!, Submit Failed!
+	Please specify a valid filename in the current directory
+	and submit again.\n";
+}
+# is file readable?
+elsif (! -r $ARGV[0])
+{
+	print "File is not Readable. Submit Failed!
+        Please fix file permissions
+	and submit again.\n";
+}
+# are there blanks in the name?
+elsif (!( $ARGV[0] !~ /\s/))
+{
+	print "BLANKS FOUND, DANGER WILL ROBINSON!!! Submit Failed!
+        Please specify a file with no blanks in the filename
+        and submit again.\n";
+}
+# is file non-zero?
+elsif (! -s $ARGV[0])
+{
+	print "File is Empty, Submit Failed!
+        Please specify a text file with data
+        and submit again.\n";
+}
+# is file ascii text or a tar file?
+elsif (! ( (-T $ARGV[0]) || ($ARGV[0] =~ /\.[tT][aA][rR]/)))
+# elsif (! -T $ARGV[0])
+{
+	print "File is not ASCII Text, Submit Failed!
+        Please specify a text file.
+        and submit again.\n";
+}
+# check section number format
+elsif ( ! $num_array{$ARGV[1]} )
+{
+	print "Invalid Assignment Number Format, Submit Failed!\n";
+	print "Assignment Number must be one of 01,02,...,29,30\n";
+}
+# Check Instructor name
+elsif ( ! $instructors{$ARGV[2]} )
+{
+	print "Invalid Instructor Login Name!\n";
+        print "Current instructors are:\n";
+        foreach my $key (sort keys %instructors) {
+                print "$key\n";
+        }
+}
+# WhooHoo they got it correct!
+else # Begin the submit process
+{
+        $INFILE = $ARGV[0];
+        $ASSIGNMENT_NUMBER = $ARGV[1];
+
+  if ( $sec < 10)
+  {
+          $sec = "0$sec";
+  }
+
+  if ( $min < 10 )
+  {
+          $min = "0$min";
+  }
+
+  if ( $hour < 10 )
+  {
+          $hour = "0$hour";
+  }
+
+  if ( $mday < 10 )
+  {
+          $mday = "0$mday";
+  }
+
+  $mon = $mon +1;
+  if ( $mon < 10 )
+  {
+          $mon = "0$mon";
+  }
+
+  $year = $year -100;
+  if ( $year < 10 )
+  {
+          $year = "0$year";
+  }
+
+  $year4 = $year +2000;
+
+ $SUBMIT_USER = getpwuid($<);
+#  $SUBMIT_USER = getlogin();
+  $OUT_FILE = "$SUBMIT_USER.$ASSIGNMENT_NUMBER.$year4$mon$mday$hour$min$sec";
+
+
+# Submit Validity Tests are above
+   system ("/bin/cp $INFILE /opt/submit/tmp_$ARGV[2]/$OUT_FILE");
+   system ("/bin/chmod 666  /opt/submit/tmp_$ARGV[2]/$OUT_FILE");
+   system ("/usr/bin/dos2unix /opt/submit/tmp_$ARGV[2]/$OUT_FILE");
+   system ("/opt/submit/doit_$ARGV[2] $OUT_FILE $ARGV[2]");
+   system ("/bin/rm -f /opt/submit/tmp_$ARGV[2]/$OUT_FILE");
+   print  ("$INFILE Successfully Submitted!\n");
+
+}#end else ARGs

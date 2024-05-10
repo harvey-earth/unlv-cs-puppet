@@ -1,0 +1,27 @@
+---
+filebeat::major_version: '6'
+realmd::manage_krb_config: false
+cups::default_queue: 'lab'
+snoopy::log_file: true
+snoopy::log_path: '/var/log/snoopy.log'
+$puppetdb::params::report_ttl: '30d'
+apt::sources:
+  'universe':
+    comment: 'Ubuntu Universe repo'
+    location: 'http://archive.ubuntu.com/ubuntu/'
+    release: 'bionic'
+    repos: 'universe'
+  'universe-updates':
+    comment: 'Ubuntu bionic-updates universe repo'
+    location: 'http://us.archive.ubuntu.com/ubuntu/'
+    release: 'bionic-updates'
+    repos: 'universe'
+netplan::version: 2
+netplan::config_file: '/etc/netplan/50-cloud-init.yaml'
+netplan::renderer: networkd
+netplan::ethernets:
+  ens3:
+    dhcp4: yes
+    nameservers:
+      search: [cs.unlv.edu, egr.unlv.edu]
+      addresses: [1.2.3.4, 5.6.7.8]
